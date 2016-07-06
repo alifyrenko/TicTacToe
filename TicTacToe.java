@@ -2,8 +2,6 @@ package test;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Created by ANTON on 06.07.2016.
@@ -11,9 +9,8 @@ import java.awt.event.ActionListener;
 public class TicTacToe {
 
     int sizeWindow = 9;
-    int emptySquaresLeft = 9;
     JButton newGameButton;
-    JButton[] squares;
+    static JButton[] squares;
     JLabel score;
 
         public void runGame () {
@@ -60,7 +57,6 @@ public class TicTacToe {
             for (int i = 0; i < sizeWindow; i++) {
                 squares[i].addActionListener(gameEngine);
             }
-
         }
 }
 
