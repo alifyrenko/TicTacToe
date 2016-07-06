@@ -10,42 +10,40 @@ import java.awt.event.ActionListener;
  */
 public class GameEngine implements ActionListener {
     
-    TicTacToe game;
-    WinnerSelection winnerSelection = new WinnerSelection();
+    Body body;
+    WinnerSelector winnerSelector = new WinnerSelector();
     ComputerPlayer computer = new ComputerPlayer();
 
-    int emptySquaresLeft = 9;
-
-    public GameEngine(TicTacToe game) {
-        this.game = game;
+    public GameEngine(Body body) {
+        this.body = body;
     }
 
     public void actionPerformed(ActionEvent e) {
         JButton theButton = (JButton) e.getSource();
 
-        if (theButton == game.newGameButton) {
+        if (theButton == body.newGameButton) {
             for (int i = 0; i < 9; i++) {
-                game.squares[i].setEnabled(true);
-                game.squares[i].setText("");
-                game.squares[i].setBackground(Color.ORANGE);
+                body.squares[i].setEnabled(true);
+                body.squares[i].setText("");
+                body.squares[i].setBackground(Color.ORANGE);
             }
-            emptySquaresLeft = 9;
-            game.score.setText("Your turn!");
+            winnerSelector.emptySquaresLeft = 9;
+            body.score.setText("Your turn!");
+
             return;
         }
 
         String winner = "";
 
         for (int i = 0; i < 9; i++) {
-            if (theButton == game.squares[i]) {
-                game.squares[i].setText("X");
-                //game.squares[i].setBackground(Color.WHITE);
-                winner = winnerSelection.lookForWinner();
+            if (theButton == body.squares[i]) {
+                body.squares[i].setText("X");
+                winner = winnerSelector.lookForWinner();
                 if (!"".equals(winner)) {
                     endTheGame();
                 } else {
                     computer.computerMove();
-                    winner = winnerSelection.lookForWinner();
+                    winner = winnerSelector.lookForWinner();
                     if (!"".equals(winner)) {
                         endTheGame();
                     }
@@ -55,19 +53,19 @@ public class GameEngine implements ActionListener {
         }
 
         if (winner.equals("X")) {
-            game.score.setText("You won!");
+            body.score.setText("You won!");
         } else if (winner.equals("O")) {
-            game.score.setText("You lost!");
+            body.score.setText("You lost!");
         } else if (winner.equals("T")) {
-            game.score.setText("It's a tie!");
+            body.score.setText("It's a tie!");
         }
     }
 
     // Делаем недоступными клетки и доступной кнопку ”New Game”
     void endTheGame() {
-        game.newGameButton.setEnabled(true);
+        body.newGameButton.setEnabled(true);
         for (int i = 0; i < 9; i++) {
-            game.squares[i].setEnabled(false);
+            body.squares[i].setEnabled(false);
         }
     }
 }

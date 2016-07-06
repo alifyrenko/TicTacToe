@@ -6,7 +6,7 @@ import java.awt.*;
 /**
  * Created by ANTON on 06.07.2016.
  */
-public class TicTacToe {
+public class Body {
 
     int sizeWindow = 9;
     JButton newGameButton;
