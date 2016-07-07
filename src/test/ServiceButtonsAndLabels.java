@@ -8,7 +8,7 @@ import java.awt.*;
  */
 public class ServiceButtonsAndLabels {
 
-   static JButton newGameButton = new JButton();
+    static JButton newGameButton = new JButton();
 
     JButton addNewGameButton() {
         newGameButton = new JButton("New Game");
@@ -20,7 +20,7 @@ public class ServiceButtonsAndLabels {
     static JButton finish = new JButton("Finish Game");
     static JLabel score = new JLabel("Your Turn!", SwingConstants.CENTER);
 
-    JPanel addPanelGameFinishScore(){
+    JPanel addPanelGameFinishScore() {
 
         int sizeBetweenButtonsHeight = 10;
         int sizeBetweenButtonsWidth = 10;
@@ -36,7 +36,6 @@ public class ServiceButtonsAndLabels {
         finish.setBackground(Color.BLUE);
         panelGameFinishScore.add("South", finish);
 
-        return  panelGameFinishScore;
+        return panelGameFinishScore;
     }
-
 }

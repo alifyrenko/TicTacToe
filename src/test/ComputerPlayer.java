@@ -8,7 +8,7 @@ import javax.swing.*;
 public class ComputerPlayer {
 
     GameField gameField;
-    
+
     void computerMove() {
         int selectedSquare;
 
@@ -38,12 +38,13 @@ public class ComputerPlayer {
             selectedSquare = getRandomSquare();
         }
         gameField.squares[selectedSquare].setText("O");
+        gameField.squares[selectedSquare].setEnabled(false);
     }
 
     int findEmptySquare(String player) {
-        
-        int weight[] = new int[9];
-        for (int i = 0; i < 9; i++) {
+
+        int weight[] = new int[gameField.squares.length];
+        for (int i = 0; i < gameField.squares.length; i++) {
             if (gameField.squares[i].getText().equals("O")) weight[i] = -1;
             else if (gameField.squares[i].getText().equals("X")) weight[i] = 1;
             else weight[i] = 0;
@@ -126,7 +127,7 @@ public class ComputerPlayer {
         boolean gotEmptySquare = false;
         int selectedSquare = -1;
         do {
-            selectedSquare = (int) (Math.random() * 9);
+            selectedSquare = (int) (Math.random() * gameField.squares.length);
             if (gameField.squares[selectedSquare].getText().equals("")) {
                 gotEmptySquare = true; // чтобы закончить цикл
             }

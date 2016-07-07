@@ -12,18 +12,17 @@ public class FrameTuner {
     static JFrame frame = new JFrame("Game Tic Tac Toe");
 
     {
-    frame.addWindowListener(new WindowAdapter() {
-        public void windowClosing(WindowEvent e) {
-            System.exit(0);
-        }
-    });
+        frame.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                System.exit(0);
+            }
+        });
     }
 
-    void tuneFrame(JPanel windowContent){
+    void tuneFrame(JPanel windowContent) {
         frame.setContentPane(windowContent);
         frame.setSize(500, 500);
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
     }
-
 }

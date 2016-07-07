@@ -8,9 +8,8 @@ import java.awt.event.ActionListener;
 /**
  * Created by ANTON on 06.07.2016.
  */
-public class GameEngine implements ActionListener{
-    
-    Body body;
+public class GameEngine implements ActionListener {
+
     GameField gameField;
     ServiceButtonsAndLabels serviceButtonsAndLabels;
 
@@ -31,7 +30,7 @@ public class GameEngine implements ActionListener{
             return;
         }
 
-        if(theButton == serviceButtonsAndLabels.finish){
+        if (theButton == serviceButtonsAndLabels.finish) {
             System.exit(0);
         }
 
@@ -40,6 +39,7 @@ public class GameEngine implements ActionListener{
 
             if (theButton == gameField.squares[i]) {
                 gameField.squares[i].setText("X");
+                gameField.squares[i].setEnabled(false);
                 winner = winnerSelector.lookForWinner();
                 if (!"".equals(winner)) {
                     endTheGame();
@@ -59,7 +59,7 @@ public class GameEngine implements ActionListener{
             serviceButtonsAndLabels.score.setText("You won!");
         } else if (winner.equals("O")) {
             serviceButtonsAndLabels.score.setText("You lost!");
-        } else if (winner.equals("T")) {
+        } else if (winner.equals("Tie")) {
             serviceButtonsAndLabels.score.setText("It's a tie!");
         }
     }

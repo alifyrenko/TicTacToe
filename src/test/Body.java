@@ -30,7 +30,6 @@ public class Body {
         for (int i = 0; i < gameField.squares.length; i++) {
             gameField.squares[i].addActionListener(gameEngine);
         }
-
     }
 }
 
