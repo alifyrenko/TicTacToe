@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by ANTON on 06.07.2016.
  */
-public class GameEngine implements ActionListener {
+public class GameEngine implements ActionListener{
     
     Body body;
     GameField gameField;
@@ -30,7 +30,7 @@ public class GameEngine implements ActionListener {
                 gameField.squares[i].setBackground(Color.ORANGE);
             }
             winnerSelector.emptySquaresLeft = 9;
-            body.score.setText("Your turn!");
+            serviceButtonsAndLabels.score.setText("Your turn!");
 
             return;
         }
@@ -43,13 +43,12 @@ public class GameEngine implements ActionListener {
 
         for (int i = 0; i < 9; i++) {
 
-
             if (theButton == gameField.squares[i]) {
-
                 gameField.squares[i].setText("X");
                 winner = winnerSelector.lookForWinner();
                 if (!"".equals(winner)) {
                     endTheGame();
+
                 } else {
                     computer.computerMove();
                     winner = winnerSelector.lookForWinner();
@@ -76,7 +75,6 @@ public class GameEngine implements ActionListener {
             gameField.squares[i].setEnabled(false);
         }
     }
-
 }
 
 

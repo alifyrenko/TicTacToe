@@ -12,37 +12,19 @@ public class Body {
 
     GameField gameField = new GameField();
     ServiceButtonsAndLabels serviceButtonsAndLabels = new ServiceButtonsAndLabels();
-
+    FrameTuner frameTuner = new FrameTuner();
     final int gameFieldSize = 9;
-    JButton finish;
-    JLabel score;
-    JFrame frame;
 
     {
-
         JPanel windowContent = new JPanel();
         BorderLayout borderLayout = new BorderLayout();
         windowContent.setLayout(borderLayout);
 
         windowContent.add("North", serviceButtonsAndLabels.addNewGameButton());
-
         windowContent.add("Center", gameField.addGameField());
-
         windowContent.add("South", serviceButtonsAndLabels.addPanelGameFinishScore());
 
-        frame = new JFrame("Game Tic Tac Toe");
-        frame.setContentPane(windowContent);
-
-        frame.setSize(500, 500);
-        frame.setVisible(true);
-        frame.setLocationRelativeTo(null);
-
-
-        frame.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                System.exit(0);
-            }
-        });
+        frameTuner.tuneFrame(windowContent);
 
         GameEngine gameEngine = new GameEngine(this);
 
