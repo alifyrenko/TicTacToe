@@ -7,7 +7,7 @@ import javax.swing.*;
  */
 public class ComputerPlayer {
 
-    Body body;
+    GameField gameField;
     
     void computerMove() {
         int selectedSquare;
@@ -27,7 +27,7 @@ public class ComputerPlayer {
         // если selectedSquare все еще равен -1, то
         // попытается занять центральную клетку
 
-        if ((selectedSquare == -1) && (body.squares[4].getText().equals(""))) {
+        if ((selectedSquare == -1) && (gameField.squares[4].getText().equals(""))) {
             selectedSquare = 4;
         }
 
@@ -37,15 +37,15 @@ public class ComputerPlayer {
         if (selectedSquare == -1) {
             selectedSquare = getRandomSquare();
         }
-        body.squares[selectedSquare].setText("O");
+        gameField.squares[selectedSquare].setText("O");
     }
 
     int findEmptySquare(String player) {
         
         int weight[] = new int[9];
         for (int i = 0; i < 9; i++) {
-            if (body.squares[i].getText().equals("O")) weight[i] = -1;
-            else if (body.squares[i].getText().equals("X")) weight[i] = 1;
+            if (gameField.squares[i].getText().equals("O")) weight[i] = -1;
+            else if (gameField.squares[i].getText().equals("X")) weight[i] = 1;
             else weight[i] = 0;
         }
         int twoWeights = player.equals("O") ? -2 : 2;
@@ -127,7 +127,7 @@ public class ComputerPlayer {
         int selectedSquare = -1;
         do {
             selectedSquare = (int) (Math.random() * 9);
-            if (body.squares[selectedSquare].getText().equals("")) {
+            if (gameField.squares[selectedSquare].getText().equals("")) {
                 gotEmptySquare = true; // чтобы закончить цикл
             }
         } while (!gotEmptySquare);

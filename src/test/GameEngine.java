@@ -4,8 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 /**
  * Created by ANTON on 06.07.2016.
@@ -13,9 +11,10 @@ import java.awt.event.WindowEvent;
 public class GameEngine implements ActionListener {
     
     Body body;
+    GameField gameField;
     WinnerSelector winnerSelector = new WinnerSelector();
     ComputerPlayer computer = new ComputerPlayer();
-    ActionEvent e;
+    ServiceButtonsAndLabels serviceButtonsAndLabels;
 
     public GameEngine(Body body) {
         this.body = body;
@@ -24,11 +23,11 @@ public class GameEngine implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         JButton theButton = (JButton) e.getSource();
 
-        if (theButton == body.newGameButton) {
+        if (theButton == serviceButtonsAndLabels.newGameButton) {
             for (int i = 0; i < 9; i++) {
-                body.squares[i].setEnabled(true);
-                body.squares[i].setText("");
-                body.squares[i].setBackground(Color.ORANGE);
+                gameField.squares[i].setEnabled(true);
+                gameField.squares[i].setText("");
+                gameField.squares[i].setBackground(Color.ORANGE);
             }
             winnerSelector.emptySquaresLeft = 9;
             body.score.setText("Your turn!");
@@ -36,7 +35,7 @@ public class GameEngine implements ActionListener {
             return;
         }
 
-        if(theButton == body.finish){
+        if(theButton == serviceButtonsAndLabels.finish){
             System.exit(0);
         }
 
@@ -45,9 +44,9 @@ public class GameEngine implements ActionListener {
         for (int i = 0; i < 9; i++) {
 
 
-            if (theButton == body.squares[i]) {
+            if (theButton == gameField.squares[i]) {
 
-                body.squares[i].setText("X");
+                gameField.squares[i].setText("X");
                 winner = winnerSelector.lookForWinner();
                 if (!"".equals(winner)) {
                     endTheGame();
@@ -63,19 +62,18 @@ public class GameEngine implements ActionListener {
         }
 
         if (winner.equals("X")) {
-            body.score.setText("You won!");
+            serviceButtonsAndLabels.score.setText("You won!");
         } else if (winner.equals("O")) {
-            body.score.setText("You lost!");
+            serviceButtonsAndLabels.score.setText("You lost!");
         } else if (winner.equals("T")) {
-            body.score.setText("It's a tie!");
+            serviceButtonsAndLabels.score.setText("It's a tie!");
         }
     }
 
     // Делаем недоступными клетки и доступной кнопку ”New Game”
     void endTheGame() {
-        body.newGameButton.setEnabled(true);
         for (int i = 0; i < 9; i++) {
-            body.squares[i].setEnabled(false);
+            gameField.squares[i].setEnabled(false);
         }
     }
 
