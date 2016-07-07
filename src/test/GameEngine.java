@@ -12,26 +12,22 @@ public class GameEngine implements ActionListener{
     
     Body body;
     GameField gameField;
-    WinnerSelector winnerSelector = new WinnerSelector();
-    ComputerPlayer computer = new ComputerPlayer();
     ServiceButtonsAndLabels serviceButtonsAndLabels;
 
-    public GameEngine(Body body) {
-        this.body = body;
-    }
+    WinnerSelector winnerSelector = new WinnerSelector();
+    ComputerPlayer computer = new ComputerPlayer();
 
     public void actionPerformed(ActionEvent e) {
         JButton theButton = (JButton) e.getSource();
 
         if (theButton == serviceButtonsAndLabels.newGameButton) {
-            for (int i = 0; i < 9; i++) {
+            for (int i = 0; i < gameField.squares.length; i++) {
                 gameField.squares[i].setEnabled(true);
                 gameField.squares[i].setText("");
                 gameField.squares[i].setBackground(Color.ORANGE);
             }
-            winnerSelector.emptySquaresLeft = 9;
+            winnerSelector.emptySquaresLeft = gameField.squares.length;
             serviceButtonsAndLabels.score.setText("Your turn!");
-
             return;
         }
 
@@ -40,8 +36,7 @@ public class GameEngine implements ActionListener{
         }
 
         String winner = "";
-
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < gameField.squares.length; i++) {
 
             if (theButton == gameField.squares[i]) {
                 gameField.squares[i].setText("X");
@@ -69,9 +64,8 @@ public class GameEngine implements ActionListener{
         }
     }
 
-    // Делаем недоступными клетки и доступной кнопку ”New Game”
     void endTheGame() {
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < gameField.squares.length; i++) {
             gameField.squares[i].setEnabled(false);
         }
     }

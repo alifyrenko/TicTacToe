@@ -2,8 +2,6 @@ package test;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 /**
  * Created by ANTON on 06.07.2016.
@@ -13,7 +11,7 @@ public class Body {
     GameField gameField = new GameField();
     ServiceButtonsAndLabels serviceButtonsAndLabels = new ServiceButtonsAndLabels();
     FrameTuner frameTuner = new FrameTuner();
-    final int gameFieldSize = 9;
+    GameEngine gameEngine = new GameEngine();
 
     {
         JPanel windowContent = new JPanel();
@@ -26,12 +24,10 @@ public class Body {
 
         frameTuner.tuneFrame(windowContent);
 
-        GameEngine gameEngine = new GameEngine(this);
-
         serviceButtonsAndLabels.newGameButton.addActionListener(gameEngine);
         serviceButtonsAndLabels.finish.addActionListener(gameEngine);
 
-        for (int i = 0; i < gameFieldSize; i++) {
+        for (int i = 0; i < gameField.squares.length; i++) {
             gameField.squares[i].addActionListener(gameEngine);
         }
 

@@ -8,8 +8,6 @@ import java.awt.*;
  */
 public class GameField {
 
-    Body body;
-
     static JButton [] squares = new JButton[9];
     JPanel panelGameField = new JPanel();
 
