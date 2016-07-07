@@ -16,7 +16,7 @@ public class WinnerSelector {
         String theWinner = "";
         emptySquaresLeft--;
         if (emptySquaresLeft == 0) {
-            return "Tie";  // это ничья. T от английского слова tie
+            return "Tie";
         }
 
         for (int i = 0; i < winComb.listWinCombination.size(); i++) {
@@ -27,15 +27,7 @@ public class WinnerSelector {
                 highlightWinner(winCase);
             }
         }
-
         return theWinner;
-    }
-
-    void highlightWinner(int[] winCombination) {
-
-        gameField.squares[winCombination[0]].setBackground(Color.CYAN);
-        gameField.squares[winCombination[1]].setBackground(Color.CYAN);
-        gameField.squares[winCombination[2]].setBackground(Color.CYAN);
     }
 
     String checkWinner(int[] winCombination) {
@@ -54,4 +46,12 @@ public class WinnerSelector {
         }
         return winner;
     }
+
+    void highlightWinner(int[] winCombination) {
+
+        gameField.squares[winCombination[0]].setBackground(Color.CYAN);
+        gameField.squares[winCombination[1]].setBackground(Color.CYAN);
+        gameField.squares[winCombination[2]].setBackground(Color.CYAN);
+    }
+
 }
