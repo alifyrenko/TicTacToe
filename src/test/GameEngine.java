@@ -4,40 +4,81 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  * Created by ANTON on 06.07.2016.
  */
-public class GameEngine implements ActionListener{
+public class GameEngine implements ActionListener {
+    
+    Body body;
+    WinnerSelector winnerSelector = new WinnerSelector();
+    ComputerPlayer computer = new ComputerPlayer();
+    ActionEvent e;
 
-    TicTacToe game;
-
-    public GameEngine(TicTacToe game) {
-        this.game = game;
+    public GameEngine(Body body) {
+        this.body = body;
     }
 
     public void actionPerformed(ActionEvent e) {
         JButton theButton = (JButton) e.getSource();
 
-        if (theButton == game.newGameButton) {
+        if (theButton == body.newGameButton) {
             for (int i = 0; i < 9; i++) {
-                game.squares[i].setEnabled(true);
-                game.squares[i].setText("");
-                game.squares[i].setBackground(Color.ORANGE);
+                body.squares[i].setEnabled(true);
+                body.squares[i].setText("");
+                body.squares[i].setBackground(Color.ORANGE);
             }
-            game.emptySquaresLeft = 9;
-            game.score.setText("Your turn!");
+            winnerSelector.emptySquaresLeft = 9;
+            body.score.setText("Your turn!");
+
             return;
+        }
+
+        if(theButton == body.finish){
+            System.exit(0);
         }
 
         String winner = "";
 
         for (int i = 0; i < 9; i++) {
-            if (theButton == game.squares[i]) {
-                game.squares[i].setText("X");
-                game.squares[i].setBackground(Color.WHITE);
-                // ЛОГИКА ИГРЫ
+
+
+            if (theButton == body.squares[i]) {
+
+                body.squares[i].setText("X");
+                winner = winnerSelector.lookForWinner();
+                if (!"".equals(winner)) {
+                    endTheGame();
+                } else {
+                    computer.computerMove();
+                    winner = winnerSelector.lookForWinner();
+                    if (!"".equals(winner)) {
+                        endTheGame();
+                    }
+                }
+                break;
             }
         }
+
+        if (winner.equals("X")) {
+            body.score.setText("You won!");
+        } else if (winner.equals("O")) {
+            body.score.setText("You lost!");
+        } else if (winner.equals("T")) {
+            body.score.setText("It's a tie!");
+        }
     }
+
+    // Делаем недоступными клетки и доступной кнопку ”New Game”
+    void endTheGame() {
+        body.newGameButton.setEnabled(true);
+        for (int i = 0; i < 9; i++) {
+            body.squares[i].setEnabled(false);
+        }
+    }
+
 }
+
+
