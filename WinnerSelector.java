@@ -33,14 +33,16 @@ public class WinnerSelector {
     String checkWinner(int[] winCombination) {
 
         String winner = "";
-        String gameFieldWin1 = gameField.squares[winCombination[0]].getText();
-        String gameFieldWin2 = gameField.squares[winCombination[1]].getText();
-        String gameFieldWin3 = gameField.squares[winCombination[2]].getText();
+        String [] gameFieldWin = new String [winCombination.length];
 
-        if (!gameFieldWin1.equals("")) {
-            if (gameFieldWin1.equals(gameFieldWin2) &&
-                    gameFieldWin1.equals(gameFieldWin3)) {
-                winner = gameFieldWin1;
+        for (int i = 0; i < gameFieldWin.length; i++) {
+            gameFieldWin[i] = gameField.squares[winCombination[i]].getText();
+        }
+
+        if (!gameFieldWin[0].equals("")) {
+            if (gameFieldWin[0].equals(gameFieldWin[1]) &&
+                    gameFieldWin[0].equals(gameFieldWin[2])) {
+                winner = gameFieldWin[0];
                 return winner;
             }
         }
@@ -49,9 +51,9 @@ public class WinnerSelector {
 
     void highlightWinner(int[] winCombination) {
 
-        gameField.squares[winCombination[0]].setBackground(Color.CYAN);
-        gameField.squares[winCombination[1]].setBackground(Color.CYAN);
-        gameField.squares[winCombination[2]].setBackground(Color.CYAN);
+        for (int i = 0; i < winCombination.length; i++) {
+            gameField.squares[winCombination[i]].setBackground(Color.CYAN);
+        }
     }
 
 }

@@ -9,7 +9,7 @@ import java.awt.*;
 public class Body {
 
     GameField gameField = new GameField();
-    ServiceButtonsAndLabels serviceButtonsAndLabels = new ServiceButtonsAndLabels();
+    ButtonsAndLabels buttonsAndLabels = new ButtonsAndLabels();
     FrameTuner frameTuner = new FrameTuner();
     GameEngine gameEngine = new GameEngine();
 
@@ -18,14 +18,14 @@ public class Body {
         BorderLayout borderLayout = new BorderLayout();
         windowContent.setLayout(borderLayout);
 
-        windowContent.add("North", serviceButtonsAndLabels.addNewGameButton());
+        windowContent.add("North", buttonsAndLabels.addNewGameButton());
         windowContent.add("Center", gameField.addGameField());
-        windowContent.add("South", serviceButtonsAndLabels.addPanelGameFinishScore());
+        windowContent.add("South", buttonsAndLabels.addPanelGameFinishScore());
 
         frameTuner.tuneFrame(windowContent);
 
-        serviceButtonsAndLabels.newGameButton.addActionListener(gameEngine);
-        serviceButtonsAndLabels.finish.addActionListener(gameEngine);
+        buttonsAndLabels.newGameButton.addActionListener(gameEngine);
+        buttonsAndLabels.finish.addActionListener(gameEngine);
 
         for (int i = 0; i < gameField.squares.length; i++) {
             gameField.squares[i].addActionListener(gameEngine);

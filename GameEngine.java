@@ -11,7 +11,14 @@ import java.awt.event.ActionListener;
 public class GameEngine implements ActionListener {
 
     GameField gameField;
-    ServiceButtonsAndLabels serviceButtonsAndLabels;
+    ButtonsAndLabels buttonsAndLabels;
+
+    public static final String HUMAN_SIGN_X = "X";
+    public static final String COMPUTER_SIGN_O = "O";
+    public static final String LABEL_TEXT_MESSAGE_TURN = "Your turn!";
+    public static final String LABEL_TEXT_MESSAGE_HUMAN_WON = "You won!";
+    public static final String LABEL_TEXT_MESSAGE_COMPUTER_WON = "You lost!";
+    public static final String LABEL_TEXT_MESSAGE_TIE = "It's a tie!";
 
     WinnerSelector winnerSelector = new WinnerSelector();
     ComputerPlayer computer = new ComputerPlayer();
@@ -19,18 +26,18 @@ public class GameEngine implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         JButton theButton = (JButton) e.getSource();
 
-        if (theButton == serviceButtonsAndLabels.newGameButton) {
+        if (theButton == buttonsAndLabels.newGameButton) {
             for (int i = 0; i < gameField.squares.length; i++) {
                 gameField.squares[i].setEnabled(true);
                 gameField.squares[i].setText("");
                 gameField.squares[i].setBackground(Color.ORANGE);
             }
             winnerSelector.emptySquaresLeft = gameField.squares.length;
-            serviceButtonsAndLabels.score.setText("Your turn!");
+            buttonsAndLabels.score.setText(LABEL_TEXT_MESSAGE_TURN);
             return;
         }
 
-        if (theButton == serviceButtonsAndLabels.finish) {
+        if (theButton == buttonsAndLabels.finish) {
             System.exit(0);
         }
 
@@ -38,7 +45,7 @@ public class GameEngine implements ActionListener {
         for (int i = 0; i < gameField.squares.length; i++) {
 
             if (theButton == gameField.squares[i]) {
-                gameField.squares[i].setText("X");
+                gameField.squares[i].setText(HUMAN_SIGN_X);
                 gameField.squares[i].setEnabled(false);
                 winner = winnerSelector.lookForWinner();
                 if (!"".equals(winner)) {
@@ -55,12 +62,12 @@ public class GameEngine implements ActionListener {
             }
         }
 
-        if (winner.equals("X")) {
-            serviceButtonsAndLabels.score.setText("You won!");
-        } else if (winner.equals("O")) {
-            serviceButtonsAndLabels.score.setText("You lost!");
+        if (winner.equals(HUMAN_SIGN_X)) {
+            buttonsAndLabels.score.setText(LABEL_TEXT_MESSAGE_HUMAN_WON);
+        } else if (winner.equals(COMPUTER_SIGN_O)) {
+            buttonsAndLabels.score.setText(LABEL_TEXT_MESSAGE_COMPUTER_WON);
         } else if (winner.equals("Tie")) {
-            serviceButtonsAndLabels.score.setText("It's a tie!");
+            buttonsAndLabels.score.setText(LABEL_TEXT_MESSAGE_TIE);
         }
     }
 

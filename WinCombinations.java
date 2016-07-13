@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class WinCombinations {
 
-    List<int[]> listWinCombination = new ArrayList<int[]>();
+   static List<int[]> listWinCombination = new ArrayList<int[]>();
 
     int[] winCombinationRow1 = {0, 1, 2};
     int[] winCombinationRow2 = {3, 4, 5};

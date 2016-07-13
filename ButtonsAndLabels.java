@@ -6,7 +6,7 @@ import java.awt.*;
 /**
  * Created by ANTON on 07.07.2016.
  */
-public class ServiceButtonsAndLabels {
+public class ButtonsAndLabels {
 
     static JButton newGameButton = new JButton();
 

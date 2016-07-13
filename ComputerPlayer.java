@@ -1,29 +1,38 @@
 package test;
 
-import javax.swing.*;
+import java.util.List;
 
 /**
  * Created by ANTON on 06.07.2016.
  */
 public class ComputerPlayer {
 
+
+
+    public static final int COMP_FIELD = -1;
+    public static final int HUMAN_FIELD = 1;
+    public static final int EMPTY_FIELD = 0;
+
+    public static final int TWO_HUMAN_FIELDS_TOGETHER = 2;
+    public static final int TWO_COMP_FIELDS_TOGETHER = -2;
+
+
     GameField gameField;
+    WinCombinations winCombinations;
+
+    List<int[]> winComb = winCombinations.listWinCombination;
 
     void computerMove() {
+
+
         int selectedSquare;
 
-        // Сначала компьютер пытается найти пустую клетку
-        // рядом с двумя клетками с ноликами, чтобы выиграть
-
-        selectedSquare = findEmptySquare("O");
-
-        // Если он не может найти два нолика, то хотя бы
-        // попытается не дать оппоненту сделать ряд из 3-х
-        // крестиков,поместив нолик рядом с двумя крестиками
+        selectedSquare = findEmptyNearTwoEqualSquares("O");
 
         if (selectedSquare == -1) {
-            selectedSquare = findEmptySquare("X");
+            selectedSquare = findEmptyNearTwoEqualSquares("X");
         }
+
         // если selectedSquare все еще равен -1, то
         // попытается занять центральную клетку
 
@@ -32,7 +41,11 @@ public class ComputerPlayer {
         }
 
         // не повезло с центральной клеткой...
-        // просто занимаем случайную клетку
+        // занимаем угловую
+
+        /*if (selectedSquare == -1) {
+            selectedSquare = getCornerSquare();
+        }*/
 
         if (selectedSquare == -1) {
             selectedSquare = getRandomSquare();
@@ -41,87 +54,61 @@ public class ComputerPlayer {
         gameField.squares[selectedSquare].setEnabled(false);
     }
 
-    int findEmptySquare(String player) {
+    int findEmptyNearTwoEqualSquares(String player) {
 
-        int weight[] = new int[gameField.squares.length];
+        int currentPlayField[] = new int[gameField.squares.length];
+
         for (int i = 0; i < gameField.squares.length; i++) {
-            if (gameField.squares[i].getText().equals("O")) weight[i] = -1;
-            else if (gameField.squares[i].getText().equals("X")) weight[i] = 1;
-            else weight[i] = 0;
+            if (gameField.squares[i].getText().equals("O")) {
+                currentPlayField[i] = COMP_FIELD;
+            } else if (gameField.squares[i].getText().equals("X")) {
+                currentPlayField[i] = HUMAN_FIELD;
+            }
+            else {
+                currentPlayField[i] = EMPTY_FIELD;
+            }
         }
-        int twoWeights = player.equals("O") ? -2 : 2;
+        int twoWeights = player.equals("O") ? TWO_COMP_FIELDS_TOGETHER : TWO_HUMAN_FIELDS_TOGETHER;
 
-        // Проверим, есть ли в ряду 1 две одинаковые клетки и
-        // одна пустая.
+        for (int i = 0; i < winComb.size(); i++) {
 
-        if (weight[0] + weight[1] + weight[2] == twoWeights) {
-            if (weight[0] == 0) return 0;
-            else if (weight[1] == 0) return 1;
-            else return 2;
+            int winCell1 = winComb.get(i)[0];
+            int winCell2 = winComb.get(i)[1];
+            int winCell3 = winComb.get(i)[2];
+
+            if (twoWeights == currentPlayField[winCell1] + currentPlayField[winCell2] + currentPlayField[winCell3]) {
+                for (int j = 0; j < winComb.get(i).length; j++) {
+                    if (currentPlayField[winCell1] == EMPTY_FIELD) {
+                        return winCell1;
+
+                    } else if (currentPlayField[winCell2] == EMPTY_FIELD) {
+                        return winCell2;
+
+                    } else if (currentPlayField[winCell3] == EMPTY_FIELD) {
+                        return winCell3;
+                    }
+                }
+            }
         }
-        // Проверим, есть ли в ряду 2 две одинаковые клетки и
-        // одна пустая.
-
-        if (weight[3] + weight[4] + weight[5] == twoWeights) {
-            if (weight[3] == 0) return 3;
-            else if (weight[4] == 0) return 4;
-            else return 5;
-        }
-
-        // Проверим, есть ли в ряду 3 две одинаковые клетки и
-        // одна пустая.
-
-        if (weight[6] + weight[7] + weight[8] == twoWeights) {
-            if (weight[6] == 0) return 6;
-            else if (weight[7] == 0) return 7;
-            else return 8;
-        }
-
-        // Проверим, есть ли в колонке 1 две одинаковые клетки и
-        // одна пустая.
-        if (weight[0] + weight[3] + weight[6] == twoWeights) {
-            if (weight[0] == 0) return 0;
-            else if (weight[3] == 0) return 3;
-            else return 6;
-        }
-
-        // Проверим, есть ли в колонке 2 две одинаковые клетки
-        // и одна пустая.
-        if (weight[1] + weight[4] + weight[7] == twoWeights) {
-            if (weight[1] == 0) return 1;
-            else if (weight[4] == 0) return 4;
-            else return 7;
-        }
-
-        // Проверим, есть ли в колонке 3 две одинаковые клетки
-        // и одна пустая.
-
-        if (weight[2] + weight[5] + weight[8] == twoWeights) {
-            if (weight[2] == 0) return 2;
-            else if (weight[5] == 0) return 5;
-            else return 8;
-        }
-
-        // Проверим, есть ли в диагонали 1 две одинаковые клетки
-        // и одна пустая.
-        if (weight[0] + weight[4] + weight[8] == twoWeights) {
-            if (weight[0] == 0) return 0;
-            else if (weight[4] == 0) return 4;
-            else return 8;
-        }
-
-        // Проверим, есть ли в диагонали 2 две одинаковые клетки
-        // и одна пустая.
-
-        if (weight[2] + weight[4] + weight[6] == twoWeights) {
-            if (weight[2] == 0) return 2;
-            else if (weight[4] == 0) return 4;
-            else return 6;
-        }
-
-        // Не найдено двух одинаковых соседних клеток
         return -1;
     }
+
+
+ /*   int getCornerSquare() {
+        int selectedSquare = -1;
+        int [] corners = {0,2,6,8};
+
+        for (int i = 0; i < corners.length; i++) {
+
+            double check = Math.random()* corners.length;
+            selectedSquare = corners[(int)Math.random()* corners.length];////////////////////////////////!!!!!!!!!!!!!!!!!!!!!!!
+            if (gameField.squares[selectedSquare].getText().equals("")){
+                return selectedSquare;
+            }
+        }
+        return selectedSquare;
+    }
+*/
 
     int getRandomSquare() {
         boolean gotEmptySquare = false;
