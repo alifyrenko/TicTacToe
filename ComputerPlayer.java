@@ -7,8 +7,6 @@ import java.util.List;
  */
 public class ComputerPlayer {
 
-
-
     public static final int COMP_FIELD = -1;
     public static final int HUMAN_FIELD = 1;
     public static final int EMPTY_FIELD = 0;

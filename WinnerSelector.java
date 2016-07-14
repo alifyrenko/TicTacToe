@@ -8,7 +8,6 @@ import java.awt.*;
 public class WinnerSelector {
     GameField gameField;
     WinCombinations winComb = new WinCombinations();
-
     int emptySquaresLeft = gameField.squares.length;
 
     String lookForWinner() {
@@ -16,13 +15,13 @@ public class WinnerSelector {
         String theWinner = "";
         emptySquaresLeft--;
         if (emptySquaresLeft == 0) {
-            return "Tie";
+            return GameEngine.RESULT_OF_GAME_TIE;
         }
 
         for (int i = 0; i < winComb.listWinCombination.size(); i++) {
             int[] winCase = winComb.listWinCombination.get(i);
 
-            if (!checkWinner(winCase).equals("")) {
+            if (!checkWinner(winCase).isEmpty()) {
                 theWinner = checkWinner(winCase);
                 highlightWinner(winCase);
             }
@@ -39,7 +38,7 @@ public class WinnerSelector {
             gameFieldWin[i] = gameField.squares[winCombination[i]].getText();
         }
 
-        if (!gameFieldWin[0].equals("")) {
+        if (!gameFieldWin[0].isEmpty()) {
             if (gameFieldWin[0].equals(gameFieldWin[1]) &&
                     gameFieldWin[0].equals(gameFieldWin[2])) {
                 winner = gameFieldWin[0];

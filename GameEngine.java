@@ -13,12 +13,15 @@ public class GameEngine implements ActionListener {
     GameField gameField;
     ButtonsAndLabels buttonsAndLabels;
 
+    String winner = "";
+
     public static final String HUMAN_SIGN_X = "X";
     public static final String COMPUTER_SIGN_O = "O";
     public static final String LABEL_TEXT_MESSAGE_TURN = "Your turn!";
     public static final String LABEL_TEXT_MESSAGE_HUMAN_WON = "You won!";
     public static final String LABEL_TEXT_MESSAGE_COMPUTER_WON = "You lost!";
     public static final String LABEL_TEXT_MESSAGE_TIE = "It's a tie!";
+    public static final String RESULT_OF_GAME_TIE = "Tie";
 
     WinnerSelector winnerSelector = new WinnerSelector();
     ComputerPlayer computer = new ComputerPlayer();
@@ -61,12 +64,16 @@ public class GameEngine implements ActionListener {
                 break;
             }
         }
+        showResultOnLabel(winner);
+    }
 
+
+    void showResultOnLabel (String winner) {
         if (winner.equals(HUMAN_SIGN_X)) {
             buttonsAndLabels.score.setText(LABEL_TEXT_MESSAGE_HUMAN_WON);
         } else if (winner.equals(COMPUTER_SIGN_O)) {
             buttonsAndLabels.score.setText(LABEL_TEXT_MESSAGE_COMPUTER_WON);
-        } else if (winner.equals("Tie")) {
+        } else if (winner.equals(RESULT_OF_GAME_TIE)) {
             buttonsAndLabels.score.setText(LABEL_TEXT_MESSAGE_TIE);
         }
     }
