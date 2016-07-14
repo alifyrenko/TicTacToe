@@ -23,7 +23,7 @@ public class WinnerSelector {
 
             if (!checkWinner(winCase).isEmpty()) {
                 theWinner = checkWinner(winCase);
-                highlightWinner(winCase);
+                highlightWinnerFields(winCase);
             }
         }
         return theWinner;
@@ -48,11 +48,10 @@ public class WinnerSelector {
         return winner;
     }
 
-    void highlightWinner(int[] winCombination) {
+    void highlightWinnerFields(int[] winCombination) {
 
         for (int i = 0; i < winCombination.length; i++) {
             gameField.squares[winCombination[i]].setBackground(Color.CYAN);
         }
     }
-
 }

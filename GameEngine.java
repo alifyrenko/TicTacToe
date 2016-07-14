@@ -13,7 +13,7 @@ public class GameEngine implements ActionListener {
     GameField gameField;
     ButtonsAndLabels buttonsAndLabels;
 
-    String winner = "";
+    String winner = null;
 
     public static final String HUMAN_SIGN_X = "X";
     public static final String COMPUTER_SIGN_O = "O";
@@ -43,21 +43,19 @@ public class GameEngine implements ActionListener {
         if (theButton == buttonsAndLabels.finish) {
             System.exit(0);
         }
-
-        String winner = "";
+        
         for (int i = 0; i < gameField.squares.length; i++) {
 
             if (theButton == gameField.squares[i]) {
                 gameField.squares[i].setText(HUMAN_SIGN_X);
                 gameField.squares[i].setEnabled(false);
                 winner = winnerSelector.lookForWinner();
-                if (!"".equals(winner)) {
+                if (!winner.isEmpty()) {
                     endTheGame();
-
                 } else {
                     computer.computerMove();
                     winner = winnerSelector.lookForWinner();
-                    if (!"".equals(winner)) {
+                    if (!winner.isEmpty()) {
                         endTheGame();
                     }
                 }
@@ -66,8 +64,7 @@ public class GameEngine implements ActionListener {
         }
         showResultOnLabel(winner);
     }
-
-
+    
     void showResultOnLabel (String winner) {
         if (winner.equals(HUMAN_SIGN_X)) {
             buttonsAndLabels.score.setText(LABEL_TEXT_MESSAGE_HUMAN_WON);
