@@ -1,6 +1,7 @@
 package test;
 
 import java.awt.*;
+import java.util.Arrays;
 
 /**
  * Created by ANTON on 06.07.2016.
@@ -37,12 +38,10 @@ public class WinnerSelector {
             gameFieldWin[i] = gameField.squares[winCombination[i]].getText();
         }
 
-        if (!gameFieldWin[0].isEmpty()) {
-            if (gameFieldWin[0].equals(gameFieldWin[1]) &&
-                    gameFieldWin[0].equals(gameFieldWin[2])) {
-                winner = gameFieldWin[0];
-                return winner;
-            }
+        Arrays.sort(gameFieldWin);
+        if(!gameFieldWin[0].isEmpty() && gameFieldWin[0] == gameFieldWin[gameFieldWin.length-1]){
+            winner = gameFieldWin[0];
+            return winner;
         }
         return winner;
     }
