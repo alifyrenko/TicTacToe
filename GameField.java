@@ -8,16 +8,16 @@ import java.awt.*;
  */
 public class GameField {
 
-    static int sizeOfGameField = 9;
+    private static int sizeOfGameField = 9;
     static JButton[] squares = new JButton[sizeOfGameField];
-    JPanel panelGameField = new JPanel();
+    private JPanel panelGameField = new JPanel();
 
-    int sizeOfText = 50;
-    Font buttonFont = new Font("Monospased", Font.BOLD, sizeOfText);
+    private int sizeOfText = 50;
+    private Font buttonFont = new Font("Monospased", Font.BOLD, sizeOfText);
 
-    int sizeBetweenButtonsHeight = 10;
-    int sizeBetweenButtonsWidth = 10;
-    GridLayout gridLayout = new GridLayout(3, 3, sizeBetweenButtonsHeight, sizeBetweenButtonsWidth);
+    private int sizeBetweenButtonsHeight = 10;
+    private int sizeBetweenButtonsWidth = 10;
+    private GridLayout gridLayout = new GridLayout(3, 3, sizeBetweenButtonsHeight, sizeBetweenButtonsWidth);
 
     JPanel addGameField() {
         for (int i = 0; i < sizeOfGameField; i++) {

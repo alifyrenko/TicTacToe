@@ -17,8 +17,8 @@ public class ButtonsAndLabels {
         return newGameButton;
     }
 
-    static JButton finish = new JButton("Finish Game");
-    static JLabel score = new JLabel("Your Turn!", SwingConstants.CENTER);
+    static JButton buttonFinishGame = new JButton("Finish Game");
+    static JLabel messageOnLabel = new JLabel("Your Turn!", SwingConstants.CENTER);
 
     JPanel addPanelGameFinishScore() {
 
@@ -27,14 +27,14 @@ public class ButtonsAndLabels {
 
         JPanel panelGameFinishScore = new JPanel();
 
-        panelGameFinishScore.add("South", score);
+        panelGameFinishScore.add("South", messageOnLabel);
 
         GridLayout gridLayoutFinishScore = new GridLayout(2, 1, sizeBetweenButtonsHeight, sizeBetweenButtonsWidth);
         panelGameFinishScore.setLayout(gridLayoutFinishScore);
 
-        finish.setForeground(Color.WHITE);
-        finish.setBackground(Color.BLUE);
-        panelGameFinishScore.add("South", finish);
+        buttonFinishGame.setForeground(Color.WHITE);
+        buttonFinishGame.setBackground(Color.BLUE);
+        panelGameFinishScore.add("South", buttonFinishGame);
 
         return panelGameFinishScore;
     }

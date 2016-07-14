@@ -11,8 +11,7 @@ public class WinnerSelector {
     int emptySquaresLeft = gameField.squares.length;
 
     String lookForWinner() {
-
-        String theWinner = "";
+        String winner = "";
         emptySquaresLeft--;
         if (emptySquaresLeft == 0) {
             return GameEngine.RESULT_OF_GAME_TIE;
@@ -22,11 +21,11 @@ public class WinnerSelector {
             int[] winCase = winComb.listWinCombination.get(i);
 
             if (!checkWinner(winCase).isEmpty()) {
-                theWinner = checkWinner(winCase);
+                winner = checkWinner(winCase);
                 highlightWinnerFields(winCase);
             }
         }
-        return theWinner;
+        return winner;
     }
 
     String checkWinner(int[] winCombination) {

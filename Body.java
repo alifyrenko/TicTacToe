@@ -25,7 +25,7 @@ public class Body {
         frameTuner.tuneFrame(windowContent);
 
         buttonsAndLabels.newGameButton.addActionListener(gameEngine);
-        buttonsAndLabels.finish.addActionListener(gameEngine);
+        buttonsAndLabels.buttonFinishGame.addActionListener(gameEngine);
 
         for (int i = 0; i < gameField.squares.length; i++) {
             gameField.squares[i].addActionListener(gameEngine);

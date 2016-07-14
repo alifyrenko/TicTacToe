@@ -13,7 +13,7 @@ public class GameEngine implements ActionListener {
     GameField gameField;
     ButtonsAndLabels buttonsAndLabels;
 
-    String winner = null;
+    private String winner = null;
 
     public static final String HUMAN_SIGN_X = "X";
     public static final String COMPUTER_SIGN_O = "O";
@@ -36,14 +36,14 @@ public class GameEngine implements ActionListener {
                 gameField.squares[i].setBackground(Color.ORANGE);
             }
             winnerSelector.emptySquaresLeft = gameField.squares.length;
-            buttonsAndLabels.score.setText(LABEL_TEXT_MESSAGE_TURN);
+            buttonsAndLabels.messageOnLabel.setText(LABEL_TEXT_MESSAGE_TURN);
             return;
         }
 
-        if (theButton == buttonsAndLabels.finish) {
+        if (theButton == buttonsAndLabels.buttonFinishGame) {
             System.exit(0);
         }
-        
+
         for (int i = 0; i < gameField.squares.length; i++) {
 
             if (theButton == gameField.squares[i]) {
@@ -67,11 +67,11 @@ public class GameEngine implements ActionListener {
     
     void showResultOnLabel (String winner) {
         if (winner.equals(HUMAN_SIGN_X)) {
-            buttonsAndLabels.score.setText(LABEL_TEXT_MESSAGE_HUMAN_WON);
+            buttonsAndLabels.messageOnLabel.setText(LABEL_TEXT_MESSAGE_HUMAN_WON);
         } else if (winner.equals(COMPUTER_SIGN_O)) {
-            buttonsAndLabels.score.setText(LABEL_TEXT_MESSAGE_COMPUTER_WON);
+            buttonsAndLabels.messageOnLabel.setText(LABEL_TEXT_MESSAGE_COMPUTER_WON);
         } else if (winner.equals(RESULT_OF_GAME_TIE)) {
-            buttonsAndLabels.score.setText(LABEL_TEXT_MESSAGE_TIE);
+            buttonsAndLabels.messageOnLabel.setText(LABEL_TEXT_MESSAGE_TIE);
         }
     }
 

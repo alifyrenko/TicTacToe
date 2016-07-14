@@ -10,16 +10,16 @@ public class WinCombinations {
 
    static List<int[]> listWinCombination = new ArrayList<int[]>();
 
-    int[] winCombinationRow1 = {0, 1, 2};
-    int[] winCombinationRow2 = {3, 4, 5};
-    int[] winCombinationRow3 = {6, 7, 8};
+    private int[] winCombinationRow1 = {0, 1, 2};
+    private int[] winCombinationRow2 = {3, 4, 5};
+    private int[] winCombinationRow3 = {6, 7, 8};
 
-    int[] winCombinationColumn1 = {0, 3, 6};
-    int[] winCombinationColumn2 = {1, 4, 7};
-    int[] winCombinationColumn3 = {2, 5, 8};
+    private int[] winCombinationColumn1 = {0, 3, 6};
+    private int[] winCombinationColumn2 = {1, 4, 7};
+    private int[] winCombinationColumn3 = {2, 5, 8};
 
-    int[] winCombinationDiagonal1 = {0, 4, 8};
-    int[] winCombinationDiagonal2 = {2, 4, 6};
+    private int[] winCombinationDiagonal1 = {0, 4, 8};
+    private int[] winCombinationDiagonal2 = {2, 4, 6};
 
     {
         listWinCombination.add(winCombinationRow1);
