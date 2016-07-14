@@ -1,5 +1,7 @@
 package test;
 
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
+
 import java.util.List;
 
 /**
@@ -25,10 +27,10 @@ public class ComputerPlayer {
 
         int selectedSquare;
 
-        selectedSquare = findEmptyNearTwoEqualSquares("O");
+        selectedSquare = findEmptyNearTwoEqualSquares(Constants.COMPUTER_SIGN_O);
 
         if (selectedSquare == -1) {
-            selectedSquare = findEmptyNearTwoEqualSquares("X");
+            selectedSquare = findEmptyNearTwoEqualSquares(Constants.HUMAN_SIGN_X);
         }
 
         // если selectedSquare все еще равен -1, то
@@ -48,7 +50,7 @@ public class ComputerPlayer {
         if (selectedSquare == -1) {
             selectedSquare = getRandomSquare();
         }
-        gameField.squares[selectedSquare].setText("O");
+        gameField.squares[selectedSquare].setText(Constants.COMPUTER_SIGN_O);
         gameField.squares[selectedSquare].setEnabled(false);
     }
 
@@ -57,16 +59,16 @@ public class ComputerPlayer {
         int currentPlayField[] = new int[gameField.squares.length];
 
         for (int i = 0; i < gameField.squares.length; i++) {
-            if (gameField.squares[i].getText().equals("O")) {
+            if (gameField.squares[i].getText().equals(Constants.COMPUTER_SIGN_O)) {
                 currentPlayField[i] = COMP_FIELD;
-            } else if (gameField.squares[i].getText().equals("X")) {
+            } else if (gameField.squares[i].getText().equals(Constants.HUMAN_SIGN_X)) {
                 currentPlayField[i] = HUMAN_FIELD;
             }
             else {
                 currentPlayField[i] = EMPTY_FIELD;
             }
         }
-        int twoWeights = player.equals("O") ? TWO_COMP_FIELDS_TOGETHER : TWO_HUMAN_FIELDS_TOGETHER;
+        int twoWeights = player.equals(Constants.COMPUTER_SIGN_O) ? TWO_COMP_FIELDS_TOGETHER : TWO_HUMAN_FIELDS_TOGETHER;
 
         for (int i = 0; i < winComb.size(); i++) {
 

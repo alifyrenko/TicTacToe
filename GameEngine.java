@@ -12,19 +12,10 @@ public class GameEngine implements ActionListener {
 
     GameField gameField;
     ButtonsAndLabels buttonsAndLabels;
-
-    private String winner = null;
-
-    public static final String HUMAN_SIGN_X = "X";
-    public static final String COMPUTER_SIGN_O = "O";
-    public static final String LABEL_TEXT_MESSAGE_TURN = "Your turn!";
-    public static final String LABEL_TEXT_MESSAGE_HUMAN_WON = "You won!";
-    public static final String LABEL_TEXT_MESSAGE_COMPUTER_WON = "You lost!";
-    public static final String LABEL_TEXT_MESSAGE_TIE = "It's a tie!";
-    public static final String RESULT_OF_GAME_TIE = "Tie";
-
     WinnerSelector winnerSelector = new WinnerSelector();
     ComputerPlayer computer = new ComputerPlayer();
+
+    private String winner = null;
 
     public void actionPerformed(ActionEvent e) {
         JButton theButton = (JButton) e.getSource();
@@ -36,7 +27,7 @@ public class GameEngine implements ActionListener {
                 gameField.squares[i].setBackground(Color.ORANGE);
             }
             winnerSelector.emptySquaresLeft = gameField.squares.length;
-            buttonsAndLabels.messageOnLabel.setText(LABEL_TEXT_MESSAGE_TURN);
+            buttonsAndLabels.messageOnLabel.setText(Constants.LABEL_TEXT_MESSAGE_TURN);
             return;
         }
 
@@ -47,7 +38,7 @@ public class GameEngine implements ActionListener {
         for (int i = 0; i < gameField.squares.length; i++) {
 
             if (theButton == gameField.squares[i]) {
-                gameField.squares[i].setText(HUMAN_SIGN_X);
+                gameField.squares[i].setText(Constants.HUMAN_SIGN_X);
                 gameField.squares[i].setEnabled(false);
                 winner = winnerSelector.lookForWinner();
                 if (!winner.isEmpty()) {
@@ -64,14 +55,14 @@ public class GameEngine implements ActionListener {
         }
         showResultOnLabel(winner);
     }
-    
+
     void showResultOnLabel (String winner) {
-        if (winner.equals(HUMAN_SIGN_X)) {
-            buttonsAndLabels.messageOnLabel.setText(LABEL_TEXT_MESSAGE_HUMAN_WON);
-        } else if (winner.equals(COMPUTER_SIGN_O)) {
-            buttonsAndLabels.messageOnLabel.setText(LABEL_TEXT_MESSAGE_COMPUTER_WON);
-        } else if (winner.equals(RESULT_OF_GAME_TIE)) {
-            buttonsAndLabels.messageOnLabel.setText(LABEL_TEXT_MESSAGE_TIE);
+        if (winner.equals(Constants.HUMAN_SIGN_X)) {
+            buttonsAndLabels.messageOnLabel.setText(Constants.LABEL_TEXT_MESSAGE_HUMAN_WON);
+        } else if (winner.equals(Constants.COMPUTER_SIGN_O)) {
+            buttonsAndLabels.messageOnLabel.setText(Constants.LABEL_TEXT_MESSAGE_COMPUTER_WON);
+        } else if (winner.equals(Constants.RESULT_OF_GAME_TIE)) {
+            buttonsAndLabels.messageOnLabel.setText(Constants.LABEL_TEXT_MESSAGE_TIE);
         }
     }
 
@@ -81,5 +72,3 @@ public class GameEngine implements ActionListener {
         }
     }
 }
-
-

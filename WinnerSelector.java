@@ -14,7 +14,7 @@ public class WinnerSelector {
         String winner = "";
         emptySquaresLeft--;
         if (emptySquaresLeft == 0) {
-            return GameEngine.RESULT_OF_GAME_TIE;
+            return Constants.RESULT_OF_GAME_TIE;
         }
 
         for (int i = 0; i < winComb.listWinCombination.size(); i++) {
@@ -53,4 +53,6 @@ public class WinnerSelector {
             gameField.squares[winCombination[i]].setBackground(Color.CYAN);
         }
     }
+
+
 }
