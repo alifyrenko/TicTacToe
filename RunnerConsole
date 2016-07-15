@@ -1,0 +1,46 @@
+package test;
+
+import java.util.Scanner;
+
+/**
+ * Class represents the console output and integer variant of ticTacToe game.
+ * @author Tramon on 15.07.2016.
+ */
+public class RunnerConsole {
+    private static final int AI_PLAYER = 1;
+    private static final int HUMAN_PLAYER = 2;
+    private static final int INITIAL_DEPTH = 0;
+
+    public static void main(String[] args) {
+        ComputerPlayer computerPlayer = new ComputerPlayer();
+        Scanner scan = new Scanner( System.in );
+        System.out.println( "Welcome to a TicTacToe game!\n" );
+        System.out.println( "You can make a move by entering and int from 0 to 8 like shown below:" );
+        System.out.println( "0 1 2\n3 4 5\n6 7 8" );
+        System.out.println( "'0'=empty space; '2'='X'; '1'='O'" );
+
+        computerPlayer.boardToString();
+
+        while ( !computerPlayer.isGameOver() ) {
+            System.out.println( "\nPlease make You're move: " );
+            int humanPlayerInput = scan.nextInt();
+
+            computerPlayer.makeMove( humanPlayerInput, HUMAN_PLAYER );
+            computerPlayer.boardToString();
+            if ( computerPlayer.isGameOver() ) {
+                break;
+            }
+            computerPlayer.invokeMinimaxAlgorithm( INITIAL_DEPTH, AI_PLAYER );
+
+            computerPlayer.makeMove( computerPlayer.getBestIndexToMove(), AI_PLAYER );
+            computerPlayer.boardToString();
+        }
+        if ( computerPlayer.isWinner( AI_PLAYER ) ) {
+            System.out.println( "You have lost the match! Thank You for playing!" );
+        } else if ( computerPlayer.isWinner( HUMAN_PLAYER ) ) {
+            System.out.println( "Congratulations! You have won the match!" );
+        } else {
+            System.out.println( "It's a tie!" );
+        }
+    }
+}
