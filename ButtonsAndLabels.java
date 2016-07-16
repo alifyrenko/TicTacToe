@@ -2,6 +2,7 @@ package test;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 /**
  * Created by ANTON on 07.07.2016.
@@ -35,6 +36,7 @@ public class ButtonsAndLabels {
         buttonFinishGame.setForeground(Color.WHITE);
         buttonFinishGame.setBackground(Color.BLUE);
         panelGameFinishScore.add("South", buttonFinishGame);
+
 
         return panelGameFinishScore;
     }
