@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by ANTON on 07.07.2016.
  */
-public class WinCombinations {
+class WinCombinations {
 
    static List<int[]> listWinCombination = new ArrayList<int[]>();
 
