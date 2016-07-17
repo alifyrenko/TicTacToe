@@ -6,7 +6,7 @@ import java.awt.*;
 /**
  * Created by ANTON on 06.07.2016.
  */
-public class Body {
+class Body {
 
     GameField gameField = new GameField();
     ButtonsAndLabels buttonsAndLabels = new ButtonsAndLabels();
