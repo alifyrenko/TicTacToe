@@ -18,7 +18,7 @@ import static test.Constants.*;
  */
 class ComputerPlayer {
     GameField gameField;
-    private int[] intField = new int[SIZE_OF_GAME_FIELD];
+    private int[] intField = new int[sizeOfGameField];
     private WinCombinations winCombinations = new WinCombinations();
     private List<Integer> availableIndexList;
     private List<WeightList> weightList;
@@ -29,7 +29,7 @@ class ComputerPlayer {
      * Where: Empty cell = 0; O = 1; X = 2;
      */
     private void parseGameFieldToIntField() {
-        for ( int i = 0; i < SIZE_OF_GAME_FIELD; i++ ) {
+        for ( int i = 0; i < sizeOfGameField; i++ ) {
             if ( gameField.squares[ i ].getText().equals( EMPTY_STRING ) ) {
                 intField[ i ] = EMPTY_CELL;
             }
@@ -48,7 +48,7 @@ class ComputerPlayer {
      */
     private List<Integer> getAvailableIndexList() {
         availableIndexList = new ArrayList<>();
-        for ( int i = 0; i < SIZE_OF_GAME_FIELD; i++ ) {
+        for ( int i = 0; i < sizeOfGameField; i++ ) {
             if ( intField[ i ] == 0 ) {
                 availableIndexList.add( i );
             }
@@ -137,6 +137,11 @@ class ComputerPlayer {
         return list.get( index );
     }
 
+    /**
+     * Gets the maximum index from the List.
+     * @param list of integer weights that are calculated for each move.
+     * @return index with the maximum value.
+     */
     private int getMaxIndex( List<Integer> list ) {
         int max = Integer.MIN_VALUE;
         int index = INITIAL_INDEX;
@@ -148,6 +153,14 @@ class ComputerPlayer {
         }
         return list.get( index );
     }
+
+    /**
+     * The minimax algorithm method calculates all of the moves for each player; 
+     * then sets for each index a value of the move -1 for loose variant, 0 for a draw and 1 for a possible win variant
+     * @param depth of a move that is calculated forward. Initial depth is 0. and with each step forward it increases.
+     * @param player side. 1 for the AI player and 2 for a human player.
+     * @return index with the maximum value.
+     */
 
     private int minimaxAlgorithm( int depth, int playerSide ) {
         List<Integer> indexesAvailable = getAvailableIndexList();
@@ -195,7 +208,7 @@ class ComputerPlayer {
     }
 
     /**
-     * Invokes the minimax algorithm with initial depth and player side.
+     * Invokes the first ocurance of minimax algorithm with initial depth of zero and player side.
      * @param depth amount of moves that AI player calculates forward for chosen side.
      * @param playerSide The side (AI or Human player). AI_PLAYER - 1; HUMAN_PLAYER = 2;
      */
@@ -204,34 +217,10 @@ class ComputerPlayer {
         minimaxAlgorithm( depth, playerSide );
     }
 
-
-    /**
-     * Method for RunnerConsole class that checks for the end of the game.
-     * @return boolean true - if the game is over. Or false - is game is not over yet.
-     */
-    boolean isGameOver() {
-        return ( isWinner( AI_PLAYER ) || isWinner( HUMAN_PLAYER ) || getAvailableIndexList().isEmpty());
-    }
-    void boardToString() {
-        int itemsInARow = 3;
-        String line = "\n+---+---+---+\n";
-        System.out.print( line );
-        int count = 0;
-        for ( int element : intField ) {
-            System.out.print( "| " + element + " " );
-            count++;
-            if ( count == itemsInARow ) {
-                count = 0;
-                System.out.print( "|" );
-                System.out.print( line );
-            }
-        }
-    }
-
     /**
      * Nested class represents a list of indexes of intField and weights for each index.
-     * @author Tramon on 08.07.2016.
-     *
+     * @param index of a cell to write a weight
+     * @param weight for the index that was given in a first param
      */
     private class WeightList {
         int index;
