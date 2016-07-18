@@ -1,7 +1,10 @@
-package test;
+import testConsole.GameField;
+import testConsole.WinCombinations;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static test.Constants.*;
 
 /**
  * Class ComputerPlayer represents AI_player to play with.
@@ -15,19 +18,11 @@ import java.util.List;
  */
 class ComputerPlayer {
     GameField gameField;
-    private final int sizeOfGameField = 9;
-    private int[] intField = new int[ sizeOfGameField ];
+    private int[] intField = new int[sizeOfGameField];
     private WinCombinations winCombinations = new WinCombinations();
     private List<Integer> availableIndexList;
     private List<WeightList> weightList;
-    private final int AI_PLAYER = 1;
-    private final int HUMAN_PLAYER = 2;
-    private final int EMPTY_CELL = 0;
-    private final int INITIAL_INDEX = -1;
-    private final String THE_O = "O";
-    private final String THE_X = "X";
-    private final String EMPTY_STRING = "";
-    private final int INITIAL_DEPTH = 0;
+
 
     /**
      * Method takes gameField of Strings of X, O, or empty strings parses and creates an Array of ints named intField.
@@ -38,10 +33,10 @@ class ComputerPlayer {
             if ( gameField.squares[ i ].getText().equals( EMPTY_STRING ) ) {
                 intField[ i ] = EMPTY_CELL;
             }
-            if ( gameField.squares[ i ].getText().equals( THE_O ) ) {
+            if ( gameField.squares[ i ].getText().equals( COMPUTER_SIGN_O ) ) {
                 intField[ i ] = AI_PLAYER;
             }
-            if ( gameField.squares[ i ].getText().equals( THE_X ) ) {
+            if ( gameField.squares[ i ].getText().equals( HUMAN_SIGN_X ) ) {
                 intField[ i ] = HUMAN_PLAYER;
             }
         }
@@ -121,7 +116,7 @@ class ComputerPlayer {
 
         makeMove( getBestIndexToMove(), AI_PLAYER );
 
-        gameField.squares[ getBestIndexToMove() ].setText( THE_O );
+        gameField.squares[ getBestIndexToMove() ].setText( COMPUTER_SIGN_O );
         gameField.squares[ getBestIndexToMove() ].setEnabled( false );
     }
 
@@ -217,7 +212,6 @@ class ComputerPlayer {
     boolean isGameOver() {
         return ( isWinner( AI_PLAYER ) || isWinner( HUMAN_PLAYER ) || getAvailableIndexList().isEmpty());
     }
-
     void boardToString() {
         int itemsInARow = 3;
         String line = "\n+---+---+---+\n";
@@ -231,6 +225,21 @@ class ComputerPlayer {
                 System.out.print( "|" );
                 System.out.print( line );
             }
+        }
+    }
+
+    /**
+     * Nested class represents a list of indexes of intField and weights for each index.
+     * @author Tramon on 08.07.2016.
+     *
+     */
+    private class WeightList {
+        int index;
+        int weight;
+
+        WeightList( int index, int weight ) {
+            this.index = index;
+            this.weight = weight;
         }
     }
 }

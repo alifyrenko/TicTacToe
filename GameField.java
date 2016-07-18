@@ -3,12 +3,14 @@ package test;
 import javax.swing.*;
 import java.awt.*;
 
+import static test.Constants.*;
+
+
 /**
  * Created by ANTON on 07.07.2016.
  */
-public class GameField {
+class GameField {
 
-    private static int sizeOfGameField = 9;
     static JButton[] squares = new JButton[sizeOfGameField];
     private JPanel panelGameField = new JPanel();
 

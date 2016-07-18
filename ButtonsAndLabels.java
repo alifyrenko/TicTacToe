@@ -4,22 +4,24 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+import static test.Constants.*;
+
 /**
  * Created by ANTON on 07.07.2016.
  */
-public class ButtonsAndLabels {
+class ButtonsAndLabels {
 
     static JButton newGameButton = new JButton();
 
     JButton addNewGameButton() {
-        newGameButton = new JButton("New Game");
+        newGameButton = new JButton(START_NEW_MATCH);
         newGameButton.setForeground(Color.WHITE);
         newGameButton.setBackground(Color.BLUE);
         return newGameButton;
     }
 
-    static JButton buttonFinishGame = new JButton("Finish Game");
-    static JLabel messageOnLabel = new JLabel("Your Turn!", SwingConstants.CENTER);
+    static JButton buttonFinishGame = new JButton(QUIT_GAME);
+    static JLabel messageOnLabel = new JLabel(YOUR_TURN, SwingConstants.CENTER);
 
     JPanel addPanelGameFinishScore() {
 

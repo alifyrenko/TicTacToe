@@ -5,10 +5,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static test.Constants.*;
+
 /**
  * Created by ANTON on 06.07.2016.
  */
-public class GameEngine implements ActionListener {
+class GameEngine implements ActionListener {
 
     GameField gameField;
     ButtonsAndLabels buttonsAndLabels;
@@ -23,7 +25,7 @@ public class GameEngine implements ActionListener {
         if (theButton == buttonsAndLabels.newGameButton) {
             for (int i = 0; i < gameField.squares.length; i++) {
                 gameField.squares[i].setEnabled(true);
-                gameField.squares[i].setText("");
+                gameField.squares[i].setText(EMPTY_STRING);
                 gameField.squares[i].setBackground(Color.ORANGE);
             }
             winnerSelector.emptySquaresLeft = gameField.squares.length;
