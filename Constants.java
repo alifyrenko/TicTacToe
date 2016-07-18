@@ -4,7 +4,7 @@ package test;
  * Created by ANTON on 14.07.2016.
  * There is a list of constants that are used thorough the App.
  */
-public class Constants {
+class Constants {
     static final String TIC_TAC_TOE_GAME = "Game Tic Tac Toe";
     static final String HUMAN_SIGN_X = "X";
     static final String COMPUTER_SIGN_O = "O";

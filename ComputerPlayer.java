@@ -1,5 +1,5 @@
-import testConsole.GameField;
-import testConsole.WinCombinations;
+
+package test;
 
 import java.util.ArrayList;
 import java.util.List;
