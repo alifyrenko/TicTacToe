@@ -11,7 +11,7 @@ import static test.Constants.*;
  */
 class GameField {
 
-    static JButton[] squares = new JButton[sizeOfGameField];
+    static JButton[] squares = new JButton[SIZE_OF_GAME_FIELD];
     private JPanel panelGameField = new JPanel();
 
     private int sizeOfText = 50;
@@ -22,7 +22,7 @@ class GameField {
     private GridLayout gridLayout = new GridLayout(3, 3, sizeBetweenButtonsHeight, sizeBetweenButtonsWidth);
 
     JPanel addGameField() {
-        for (int i = 0; i < sizeOfGameField; i++) {
+        for (int i = 0; i < SIZE_OF_GAME_FIELD; i++) {
             squares[i] = new JButton();
             squares[i].setBackground(Color.ORANGE);
             squares[i].setFont(buttonFont);

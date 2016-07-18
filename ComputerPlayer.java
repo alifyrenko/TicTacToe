@@ -18,7 +18,7 @@ import static test.Constants.*;
  */
 class ComputerPlayer {
     GameField gameField;
-    private int[] intField = new int[sizeOfGameField];
+    private int[] intField = new int[SIZE_OF_GAME_FIELD];
     private WinCombinations winCombinations = new WinCombinations();
     private List<Integer> availableIndexList;
     private List<WeightList> weightList;
@@ -29,7 +29,7 @@ class ComputerPlayer {
      * Where: Empty cell = 0; O = 1; X = 2;
      */
     private void parseGameFieldToIntField() {
-        for ( int i = 0; i < sizeOfGameField; i++ ) {
+        for ( int i = 0; i < SIZE_OF_GAME_FIELD; i++ ) {
             if ( gameField.squares[ i ].getText().equals( EMPTY_STRING ) ) {
                 intField[ i ] = EMPTY_CELL;
             }
@@ -48,7 +48,7 @@ class ComputerPlayer {
      */
     private List<Integer> getAvailableIndexList() {
         availableIndexList = new ArrayList<>();
-        for ( int i = 0; i < sizeOfGameField; i++ ) {
+        for ( int i = 0; i < SIZE_OF_GAME_FIELD; i++ ) {
             if ( intField[ i ] == 0 ) {
                 availableIndexList.add( i );
             }

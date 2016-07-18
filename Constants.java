@@ -22,5 +22,5 @@ class Constants {
     static final int HUMAN_PLAYER = 2;
     static final int INITIAL_INDEX = -1;
     static final int INITIAL_DEPTH = 0;
-    static final int sizeOfGameField = 9;
+    static final int SIZE_OF_GAME_FIELD = 9;
 }
