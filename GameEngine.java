@@ -29,7 +29,7 @@ class GameEngine implements ActionListener {
                 gameField.squares[i].setBackground(Color.ORANGE);
             }
             winnerSelector.emptySquaresLeft = gameField.squares.length;
-            buttonsAndLabels.messageOnLabel.setText(Constants.LABEL_TEXT_MESSAGE_TURN);
+            buttonsAndLabels.messageOnLabel.setText(LABEL_TEXT_MESSAGE_TURN);
             return;
         }
 
@@ -40,7 +40,7 @@ class GameEngine implements ActionListener {
         for (int i = 0; i < gameField.squares.length; i++) {
 
             if (theButton == gameField.squares[i]) {
-                gameField.squares[i].setText(Constants.HUMAN_SIGN_X);
+                gameField.squares[i].setText(HUMAN_SIGN_X);
                 gameField.squares[i].setEnabled(false);
                 winner = winnerSelector.lookForWinner();
                 if (!winner.isEmpty()) {
@@ -59,12 +59,12 @@ class GameEngine implements ActionListener {
     }
 
     void showResultOnLabel (String winner) {
-        if (winner.equals(Constants.HUMAN_SIGN_X)) {
-            buttonsAndLabels.messageOnLabel.setText(Constants.LABEL_TEXT_MESSAGE_HUMAN_WON);
-        } else if (winner.equals(Constants.COMPUTER_SIGN_O)) {
-            buttonsAndLabels.messageOnLabel.setText(Constants.LABEL_TEXT_MESSAGE_COMPUTER_WON);
-        } else if (winner.equals(Constants.RESULT_OF_GAME_TIE)) {
-            buttonsAndLabels.messageOnLabel.setText(Constants.LABEL_TEXT_MESSAGE_TIE);
+        if (winner.equals(HUMAN_SIGN_X)) {
+            buttonsAndLabels.messageOnLabel.setText(LABEL_TEXT_MESSAGE_HUMAN_WON);
+        } else if (winner.equals(COMPUTER_SIGN_O)) {
+            buttonsAndLabels.messageOnLabel.setText(LABEL_TEXT_MESSAGE_COMPUTER_WON);
+        } else if (winner.equals(RESULT_OF_GAME_TIE)) {
+            buttonsAndLabels.messageOnLabel.setText(LABEL_TEXT_MESSAGE_TIE);
         }
     }
 
