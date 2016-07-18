@@ -6,7 +6,7 @@ import java.util.Arrays;
 /**
  * Created by ANTON on 06.07.2016.
  */
-public class WinnerSelector {
+class WinnerSelector {
     GameField gameField;
     WinCombinations winComb = new WinCombinations();
     int emptySquaresLeft = gameField.squares.length;

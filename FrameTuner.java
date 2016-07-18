@@ -4,12 +4,14 @@ import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import static test.Constants.*;
+
 /**
  * Created by ANTON on 07.07.2016.
  */
-public class FrameTuner {
+class FrameTuner {
 
-    static JFrame frame = new JFrame("Game Tic Tac Toe");
+    static JFrame frame = new JFrame(TIC_TAC_TOE_GAME);
 
     {
         frame.addWindowListener(new WindowAdapter() {
