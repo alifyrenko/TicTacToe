@@ -9,7 +9,7 @@ import static console.Constants.COMPUTER_SIGN_O;
  * Created by ANTON on 21.07.2016.
  */
 public class AvailableMoves {
-    static List<String> usedMoves = new ArrayList<>();
+     List<String> usedMoves = new ArrayList<>();
 
     boolean isAvailableMove(String humanMove) {
         int move;
