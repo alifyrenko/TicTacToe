@@ -17,7 +17,7 @@ public class AvailableMoves {
         try {
             move = Integer.parseInt(humanMove);
             if (GameField.squares[move].equals(COMPUTER_SIGN_O) || GameField.squares[move].equals(HUMAN_SIGN_X)) {
-                System.out.println("Field is already used by computer!");
+                System.out.println("Field is already used!");
                 return false;
 
             } else {
