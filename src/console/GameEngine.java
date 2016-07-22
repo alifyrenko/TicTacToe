@@ -9,14 +9,21 @@ import static console.Constants.*;
  */
 public class GameEngine {
 
-    GameField gameField = new GameField();
-    WinnerSelector winnerSelector = new WinnerSelector();
-    ComputerPlayer computer = new ComputerPlayer();
-    HumanPlayer humanPlayer = new HumanPlayer();
+    private GameField gameField;
+    private WinnerSelector winnerSelector;
+    private ComputerPlayer computer;
+    private HumanPlayer humanPlayer;
 
-    private String winner = "";
+    public GameEngine() {
+        gameField = new GameField();
+        winnerSelector = new WinnerSelector();
+        computer = new ComputerPlayer();
+        humanPlayer = new HumanPlayer();
+    }
 
     public void startGame() throws IOException {
+
+        String winner = "";
         System.out.println(TIC_TAC_TOE_GAME);
 
         for (int i = 0; i < SIZE_OF_GAME_FIELD; i++) {

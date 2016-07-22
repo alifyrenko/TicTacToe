@@ -3,22 +3,27 @@ package console;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Scanner;
 
 /**
  * Created by ANTON on 14.07.2016.
  */
 public class HumanPlayer {
 
-    AvailableMoves availableMoves = new AvailableMoves();
+    private AvailableMoves availableMoves;
     String humanMove;
+
+    public HumanPlayer() {
+        availableMoves = new AvailableMoves();
+    }
 
     void makeHumanMove() throws IOException {
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        Scanner scanner = new Scanner(System.in);
         boolean isAvailableMovement = false;
 
         while (!isAvailableMovement) {
-            humanMove = reader.readLine();
+            humanMove = scanner.nextLine();
             isAvailableMovement = availableMoves.isAvailableMove(humanMove);
         }
     }
