@@ -18,12 +18,8 @@ public class GameField {
     void showGameFieldMoves (){
         System.out.println(" ___ ___ ___");
         builder.append("|_").append(squares[0]).append("_|_").append(squares[1]).append("_|_").append(squares[2]).append("_|");
-        System.out.println(builder);
-        builder.setLength(0);
-        builder.append("|_").append(squares[3]).append("_|_").append(squares[4]).append("_|_").append(squares[5]).append("_|");
-        System.out.println(builder);
-        builder.setLength(0);
-        builder.append("|_").append(squares[6]).append("_|_").append(squares[7]).append("_|_").append(squares[8]).append("_|");
+        builder.append("\n|_").append(squares[3]).append("_|_").append(squares[4]).append("_|_").append(squares[5]).append("_|");
+        builder.append("\n|_").append(squares[6]).append("_|_").append(squares[7]).append("_|_").append(squares[8]).append("_|");
         System.out.println(builder);
         builder.setLength(0);
     }

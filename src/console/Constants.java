@@ -12,7 +12,6 @@ class Constants {
     static final String LABEL_TEXT_MESSAGE_HUMAN_WON = "You won!";
     static final String LABEL_TEXT_MESSAGE_COMPUTER_WON = "You lost!";
     static final String LABEL_TEXT_MESSAGE_TIE = "It's a tie!";
-    static final String RESULT_OF_GAME_TIE = "Tie";
     static final String EMPTY_STRING = "";
     static final int EMPTY_CELL = 0;
     static final int AI_PLAYER = 1;
