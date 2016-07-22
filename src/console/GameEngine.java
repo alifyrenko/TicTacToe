@@ -1,6 +1,7 @@
 package console;
 
 import java.io.IOException;
+
 import static console.Constants.*;
 
 
@@ -9,6 +10,7 @@ import static console.Constants.*;
  */
 public class GameEngine {
 
+    private int emptySquaresLeft;
     private GameField gameField;
     private WinnerSelector winnerSelector;
     private ComputerPlayer computer;
@@ -19,18 +21,17 @@ public class GameEngine {
         winnerSelector = new WinnerSelector();
         computer = new ComputerPlayer();
         humanPlayer = new HumanPlayer();
+        emptySquaresLeft = SIZE_OF_GAME_FIELD;
     }
 
     public void startGame() throws IOException {
-
-        String winner = "";
         System.out.println(TIC_TAC_TOE_GAME);
 
         for (int i = 0; i < SIZE_OF_GAME_FIELD; i++) {
             GameField.squares[i] = "" + i;
         }
 
-        while (winner.isEmpty()) {
+        while (!winnerSelector.isWinnerExist()) {
 
             gameField.showGameFieldMoves();
             System.out.println(LABEL_TEXT_MESSAGE_TURN);
@@ -41,34 +42,29 @@ public class GameEngine {
 
                 if (humanPlayer.humanMove.equals(GameField.squares[i])) {
                     GameField.squares[i] = HUMAN_SIGN_X;
-                    winner = winnerSelector.lookForWinner();
+                    emptySquaresLeft--;
 
-                    if (!winner.isEmpty()) {
+                    if (emptySquaresLeft == 0) {
                         gameField.showGameFieldMoves();
-                        showResultOnLabel(winner);
+                        System.out.println(LABEL_TEXT_MESSAGE_TIE);
                         return;
+                    }
+
+                    if (winnerSelector.isWinnerExist()) {
+                        gameField.showGameFieldMoves();
+                        System.out.println(LABEL_TEXT_MESSAGE_HUMAN_WON);
+                        return;
+
                     } else {
                         computer.computerMove();
-                        winner = winnerSelector.lookForWinner();
-                        if (!winner.isEmpty()) {
+                        emptySquaresLeft--;
+                        if (winnerSelector.isWinnerExist()) {
                             gameField.showGameFieldMoves();
-                            showResultOnLabel(winner);
+                            System.out.println(LABEL_TEXT_MESSAGE_COMPUTER_WON);
                             return;
                         }
                     }
                 }
-            }
-        }
-    }
-
-    void showResultOnLabel(String winner) {
-        if (winner.equals(HUMAN_SIGN_X)) {
-            System.out.println(LABEL_TEXT_MESSAGE_HUMAN_WON);
-        } else {
-            if (winner.equals(COMPUTER_SIGN_O)) {
-                System.out.println(LABEL_TEXT_MESSAGE_COMPUTER_WON);
-            } else if (winner.equals(RESULT_OF_GAME_TIE)) {
-                System.out.println(LABEL_TEXT_MESSAGE_TIE);
             }
         }
     }
