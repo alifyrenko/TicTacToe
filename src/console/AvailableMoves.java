@@ -10,6 +10,7 @@ import static console.Constants.HUMAN_SIGN_X;
  * Created by ANTON on 21.07.2016.
  */
 public class AvailableMoves {
+
     List<String> usedMoves = new ArrayList<>();
 
     boolean isAvailableMove(String humanMove) {
