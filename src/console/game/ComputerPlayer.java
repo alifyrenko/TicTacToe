@@ -1,18 +1,8 @@
-package console;
+package console.game;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import static console.Constants.SIZE_OF_GAME_FIELD;
-import static console.Constants.EMPTY_STRING;
-import static console.Constants.EMPTY_CELL;
-import static console.Constants.COMPUTER_SIGN_O;
-import static console.Constants.HUMAN_SIGN_X;
-import static console.Constants.AI_PLAYER;
-import static console.Constants.HUMAN_PLAYER;
-import static console.Constants.INITIAL_INDEX;
-import static console.Constants.INITIAL_DEPTH;
 
 
 /**
@@ -26,9 +16,8 @@ import static console.Constants.INITIAL_DEPTH;
  *          3 4 5
  *          6 7 8
  */
-class ComputerPlayer {
-    //GameField gameField;
-    private int[] intField = new int[SIZE_OF_GAME_FIELD];
+public class ComputerPlayer {
+    private int[] intField = new int[Constants.SIZE_OF_GAME_FIELD];
     private List<Integer> availableIndexList;
     private List<WeightList> weightList;
 
@@ -38,14 +27,14 @@ class ComputerPlayer {
      * Where: Empty cell = 0; O = 1; X = 2;
      */
 
-    private void parseGameFieldToIntField() {
-        for (int i = 0; i < SIZE_OF_GAME_FIELD; i++) {
-            if (GameField.squares[i].equals(EMPTY_STRING)) {
-                intField[i] = EMPTY_CELL;
-            } else if (GameField.squares[i].equals(COMPUTER_SIGN_O)) {
-                intField[i] = AI_PLAYER;
-            } else if (GameField.squares[i].equals(HUMAN_SIGN_X)) {
-                intField[i] = HUMAN_PLAYER;
+    public void parseGameFieldToIntField() {
+        for (int i = 0; i < Constants.SIZE_OF_GAME_FIELD; i++) {
+            if (GameField.squares[i].equals(Constants.EMPTY_STRING)) {
+                intField[i] = Constants.EMPTY_CELL;
+            } else if (GameField.squares[i].equals(Constants.COMPUTER_SIGN_O)) {
+                intField[i] = Constants.AI_PLAYER;
+            } else if (GameField.squares[i].equals(Constants.HUMAN_SIGN_X)) {
+                intField[i] = Constants.HUMAN_PLAYER;
             }
         }
     }
@@ -57,7 +46,7 @@ class ComputerPlayer {
      */
     private List<Integer> getAvailableIndexList() {
         availableIndexList = new ArrayList<>();
-        for (int i = 0; i < SIZE_OF_GAME_FIELD; i++) {
+        for (int i = 0; i < Constants.SIZE_OF_GAME_FIELD; i++) {
             if (intField[i] == 0) {
                 availableIndexList.add(i);
             }
@@ -71,11 +60,11 @@ class ComputerPlayer {
      * @param playerSide Takes input of AI_PLAYER = 1; or HUMAN_PLAYER = 2;
      * @return boolean: true - if there is a winner with such param. False if there is no winner.
      */
-    boolean isWinner(int playerSide) {
+   public boolean isWinner(int playerSide) {
         boolean result = false;
 
-        for (int i = 0; i < WinCombinations.listWinCombination.size(); i++) {
-            int[] someWinCombination = WinCombinations.listWinCombination.get(i);
+        for (int i = 0; i < WinCombinations.getListWinCombination().size(); i++) {
+            int[] someWinCombination = WinCombinations.getListWinCombination().get(i);
             if (intField[someWinCombination[0]] == playerSide &&
                     intField[someWinCombination[1]] == playerSide &&
                     intField[someWinCombination[2]] == playerSide) {
@@ -93,7 +82,7 @@ class ComputerPlayer {
     int getBestIndexToMove() {
 
         int max = Integer.MIN_VALUE;
-        int best = INITIAL_INDEX;
+        int best = Constants.INITIAL_INDEX;
 
         for (int i = 0; i < weightList.size(); i++) {
             if (max < weightList.get(i).weight) {
@@ -124,11 +113,11 @@ class ComputerPlayer {
      */
     void computerMove() {
         parseGameFieldToIntField();
-        invokeMinimaxAlgorithm(INITIAL_DEPTH, AI_PLAYER);
+        invokeMinimaxAlgorithm(Constants.INITIAL_DEPTH, Constants.AI_PLAYER);
 
-        makeMove(getBestIndexToMove(), AI_PLAYER);
+        makeMove(getBestIndexToMove(), Constants.AI_PLAYER);
 
-        GameField.squares[getBestIndexToMove()] = (COMPUTER_SIGN_O);
+        GameField.squares[getBestIndexToMove()] = (Constants.COMPUTER_SIGN_O);
     }
 
     /**
@@ -156,9 +145,9 @@ class ComputerPlayer {
         final int DECREMENT_WEIGHT = -1;
         final int TIE = 0;
 
-        if (isWinner(AI_PLAYER)) {
+        if (isWinner(Constants.AI_PLAYER)) {
             return INCREMENT_WEIGHT;
-        } else if (isWinner(HUMAN_PLAYER)) {
+        } else if (isWinner(Constants.HUMAN_PLAYER)) {
             return DECREMENT_WEIGHT;
         } else if (indexesAvailable.isEmpty()) {
             return TIE;
@@ -167,24 +156,24 @@ class ComputerPlayer {
         for (int i = 0; i < indexesAvailable.size(); i++) {
             int index = indexesAvailable.get(i);
 
-            if (playerSide == AI_PLAYER) {
-                makeMove(index, AI_PLAYER);
-                int tempWeight = minimaxAlgorithm(depth + 1, HUMAN_PLAYER);
+            if (playerSide == Constants.AI_PLAYER) {
+                makeMove(index, Constants.AI_PLAYER);
+                int tempWeight = minimaxAlgorithm(depth + 1, Constants.HUMAN_PLAYER);
                 weight.add(tempWeight);
 
-                if (depth == INITIAL_DEPTH) {
+                if (depth == Constants.INITIAL_DEPTH) {
                     weightList.add(new WeightList(index, tempWeight));
                 }
 
-            } else if (playerSide == HUMAN_PLAYER) {
-                makeMove(index, HUMAN_PLAYER);
-                weight.add(minimaxAlgorithm(depth + 1, AI_PLAYER));
+            } else if (playerSide == Constants.HUMAN_PLAYER) {
+                makeMove(index, Constants.HUMAN_PLAYER);
+                weight.add(minimaxAlgorithm(depth + 1, Constants.AI_PLAYER));
             }
-            intField[index] = EMPTY_CELL;
+            intField[index] = Constants.EMPTY_CELL;
         }
 
         int minimaxAlgorithmResult;
-        if (playerSide == AI_PLAYER) {
+        if (playerSide == Constants.AI_PLAYER) {
             minimaxAlgorithmResult = getMaxIndex(weight);
         } else {
             minimaxAlgorithmResult = getMinIndex(weight);

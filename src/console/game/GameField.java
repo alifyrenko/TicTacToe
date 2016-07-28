@@ -1,6 +1,6 @@
-package console;
+package console.game;
 
-import static console.Constants.SIZE_OF_GAME_FIELD;
+import static console.game.Constants.SIZE_OF_GAME_FIELD;
 
 /**
  * Created by ANTON on 07.07.2016.
@@ -13,7 +13,7 @@ public class GameField {
         builder = new StringBuilder();
     }
 
-    static String [] squares = new String[SIZE_OF_GAME_FIELD];
+    public static String [] squares = new String[SIZE_OF_GAME_FIELD];
 
     void showGameFieldMoves (){
         System.out.println(" ___ ___ ___");

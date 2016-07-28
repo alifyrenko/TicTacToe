@@ -1,8 +1,8 @@
-package console;
+package console.game;
 
 import java.io.IOException;
 
-import static console.Constants.*;
+import static console.game.Constants.*;
 
 
 /**

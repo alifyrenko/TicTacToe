@@ -1,4 +1,4 @@
-package console;
+package console.game;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,11 @@ import java.util.List;
  */
 public class WinCombinations {
 
-    static List<int[]> listWinCombination = new ArrayList<>();
+   private static List<int[]> listWinCombination = new ArrayList<>();
+
+    public static List<int[]> getListWinCombination() {
+        return listWinCombination;
+    }
 
     static {
         listWinCombination.add(new int[]{0, 1, 2});

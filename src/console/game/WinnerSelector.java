@@ -1,4 +1,4 @@
-package console;
+package console.game;
 
 import java.util.Arrays;
 
@@ -11,10 +11,10 @@ public class WinnerSelector {
         new WinCombinations();
     }
 
-    boolean isWinnerExist() {
+   public boolean isWinnerExist() {
 
-        for (int i = 0; i < WinCombinations.listWinCombination.size(); i++) {
-            int[] winCase = WinCombinations.listWinCombination.get(i);
+        for (int i = 0; i < WinCombinations.getListWinCombination().size(); i++) {
+            int[] winCase = WinCombinations.getListWinCombination().get(i);
 
             String[] gameFieldsWin = new String[winCase.length];
 
